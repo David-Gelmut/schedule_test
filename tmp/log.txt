@@ -1,0 +1,22 @@
+[2025-03-16 16:49:28]: 0
+
+[2025-03-16 16:51:23]: 46
+
+[2025-03-16 16:52:48]: Ошибка сохранения в базе SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INERT INTO schedules (region_id,courier_id,date) VALUES ('6','10','2025-12-06')' at line 1 c кодом 42000 в файле /var/www/app/src/Database.php на строке 42
+
+[2025-03-16 16:52:48]: 
+
+[2025-03-16 16:55:14]: Ошибка сохранения в базе SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INERT INTO schedules (region_id,courier_id,date) VALUES ('6','10','2025-12-06')' at line 1 c кодом 42000 в файле /var/www/app/src/Database.php на строке 42
+
+[2025-03-16 16:55:14]: 
+
+[2025-03-16 16:55:38]: Ошибка сохранения в базе SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INERT INTO schedules (region_id,courier_id,date) VALUES ('8','9','2025-10-22')' at line 1 c кодом 42000 в файле /var/www/app/src/Database.php на строке 42
+
+[2025-03-16 16:55:38]: 
+
+[2025-03-16 16:56:42]: Ошибка сохранения в базе SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'INERT INTO schedules (region_id,courier_id,date) VALUES ('2','4','2025-08-09')' at line 1 c кодом 42000 в файле /var/www/app/src/Database.php на строке 42
+
+[2025-03-16 16:56:42]: 
+
+[2025-03-16 16:57:04]: 0
+
