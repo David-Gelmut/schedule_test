@@ -1,4 +1,5 @@
 ## Развёртывание приложения локально:
+
 ### Локально:
     #Запуск локального сервера php:
     make run
@@ -20,6 +21,16 @@
 
     #Бэкап сайта в папку backup:
     make backup_site
+#### Запуск проекта по http://localhost:8000 . 
+#### Настройки базы в config/core 
+    const DB_SETTINGS = [
+            ....
+        'host' => 'localhost',
+        'database' => 'database_test',
+        'user' => 'root',
+        'password' => '12345',
+            ....
+    ];
 
 ### Докеризация:
     #Запуск контейнеров докера:
@@ -40,8 +51,15 @@
     
     #Запуск сидеров для таблицы schelules:
     make docker_sch_seed    
-
-
-
+#### Запуск проекта по http://localhost:8080 .
+#### Настройки базы в config/core
+    const DB_SETTINGS = [
+            ....
+        'host' => 'db',
+        'database' => 'db_name',
+        'user' => 'root',
+        'password' => 'root',
+            ....
+    ];
 
 
