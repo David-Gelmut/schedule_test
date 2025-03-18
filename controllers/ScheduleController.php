@@ -28,7 +28,6 @@ class ScheduleController
         }
 
         $idSavedScheduler = Database::getInstance()->insert('schedules', $request);
-        Log::msg($idSavedScheduler);
         if ($idSavedScheduler === 0) {
             return [
                 'status' => true
