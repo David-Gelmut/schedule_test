@@ -20,7 +20,8 @@ class Region
 
     public static function getRegionDurationToID(int $idRegion): int
     {
-        return (Database::getInstance()->findOne(static::$table, $idRegion))['duration'];
+        $region = Database::getInstance()->findOne(static::$table, $idRegion);
+        return isset($region['duration']) ?: 0;
     }
 
     public static function getEndDateFromStart(int $idRegion, string $beginDate): int
