@@ -28,7 +28,7 @@ $regions = \models\Region::getAllRegions();
                         <div>Нет данных</div>
                     <?php endif; ?>
                 </select>
-                <div class="error_courier_id text-red-500"></div>
+                <div class="error-class error_courier_id text-red-500"></div>
             </div>
             <div class="mb-5">
                 <label for="default-datepicker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Дата выезда</label>
@@ -40,7 +40,7 @@ $regions = \models\Region::getAllRegions();
                     </div>
                     <input name="date" datepicker id="default-datepicker" datepicker-format="yyyy-mm-dd" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Выберите дату">
                 </div>
-                <div class="error_date text-red-500"></div>
+                <div class="error-class error_date text-red-500"></div>
             </div>
             <div class="mb-5">
                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Выберите регион</label>
@@ -54,11 +54,11 @@ $regions = \models\Region::getAllRegions();
                         <div>Нет данных</div>
                     <?php endif; ?>
                 </select>
-                <div class="error_region_id text-red-500"></div>
+                <div class="error-class error_region_id text-red-500"></div>
             </div>
-            <div class="error_message text-red-500  mb-2"></div>
-            <div class="error_store text-red-500  mb-2"></div>
-            <div class="info_success text-green-500  mb-2"></div>
+            <div class="error-class error_message text-red-500  mb-2"></div>
+            <div class="error-class error_store text-red-500  mb-2"></div>
+            <div class="error-class info_success text-green-500  mb-2"></div>
             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Добавить запись</button>
         </form>
 
@@ -99,7 +99,12 @@ $regions = \models\Region::getAllRegions();
 <script>
 $(document).ready(function (){
 
-     let form = $('#schedule_form');
+    let form = $('#schedule_form');
+    $(form).on('click',function (){
+        $('.error-class').text('');
+        $('input, select').removeClass('border-red-500');
+    })
+
      form.on('submit',function (e){
          e.preventDefault();
 
