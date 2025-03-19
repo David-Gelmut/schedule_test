@@ -2,19 +2,19 @@
 
 namespace controllers;
 
-
+use models\Courier;
 use models\Region;
 use models\Schedule;
 use src\Database;
-use src\Log;
-use src\Request;
 
-class ScheduleController
+class ScheduleController extends Controller
 {
-    public function index(): void
+    public function index(): \src\View|string
     {
         $schedulesIndex = Schedule::getSchedulesWithRegionsAndCouriers();
-        include ROOT . '/views/schedules/index.php';
+        $couriers = Courier::getAllCouriers();
+        $regions = Region::getAllRegions();
+        return $this->view->render('schedules/index', compact('schedulesIndex', 'couriers', 'regions'));
     }
 
     public function store(array $request): array
@@ -38,9 +38,9 @@ class ScheduleController
         ];
     }
 
-    public function filter(array $request): string
+    public function filter(array $request): string|false
     {
         $schedulesIndex = Schedule::getScheduleForPeriodTime($request['start'], $request['end']);
-        return include ROOT . '/views/schedules/index.php';
+        return $this->view->renderPartial('schedules/index', compact('schedulesIndex'));
     }
 }

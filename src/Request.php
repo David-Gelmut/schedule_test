@@ -14,7 +14,7 @@ class Request
         $errors = [];
         if ($this->isPost()) {
             foreach ($_POST as $key => $param) {
-                if (empty($param)||$param == 0) {
+                if (empty($param) || $param == 0) {
                     $errors[$key] = 'Заполните поле';
                 }
             }
@@ -39,6 +39,38 @@ class Request
     public function isAjax(): bool
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+    }
+
+    public function ajaxRequest(Response $response, array $fieldsRequest): false|string
+    {
+        $action = explode('/', $fieldsRequest['action']);
+        unset($fieldsRequest['action']);
+        $controllerName = ucfirst($action[0]) . 'Controller';
+        $method = $action[1];
+        $controllerFile = ROOT . '/controllers/' . $controllerName . '.php';
+
+        if (file_exists($controllerFile)) {
+            require_once($controllerFile);
+            $controllerObject = '\\controllers\\' . $controllerName;
+            $controllerObject = new $controllerObject;
+            $schedulesResult = $controllerObject->$method($fieldsRequest);
+            switch ($method) {
+                case 'store':
+                    if ($schedulesResult['status']) {
+                        return $response->json(true, 'Данные сохранены');
+                    }
+                    if (isset($schedulesResult['data'])) {
+                        return $response->json(false, 'Курьер вне доступа', [], $schedulesResult['data']);
+                    }
+                    return $response->json(false, 'Ошибка при сохранении в базе');
+                case 'filter':
+                    if ($schedulesResult) {
+                        return $schedulesResult;
+                    }
+                    return 'Ошибка получения данных';
+            }
+        }
+        return $response->json(false, 'Не найден контроллер');
     }
 
     public function isGet(): bool

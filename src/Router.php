@@ -11,7 +11,7 @@ class Router
         $this->routes = include ROOT . '/routes/web.php';
     }
 
-    public function run()
+    public function run():mixed
     {
         foreach ($this->routes as $uriPattern => $path) {
             if ($uriPattern == $this->request->getURI()) {
@@ -26,12 +26,12 @@ class Router
                     $controllerObject = new $controllerObject;;
                     $parameters = [];
                     $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-
                     if ($result) {
-                       return;
+                       return $result;
                     }
                 }
             }
         }
+        return '';
     }
 }

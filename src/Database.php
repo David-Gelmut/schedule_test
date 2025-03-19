@@ -15,13 +15,19 @@ class Database
     private ?string $having = null;
     private ?string $limit = null;
     private ?string $order = null;
+    public ?array $db = [];
 
     private function __construct()
     {
-        $dsn = "mysql:host=" . DB_SETTINGS['host'] . ";port=" . DB_SETTINGS['port'] . ";dbname=" . DB_SETTINGS['database'] . ";charset=" . DB_SETTINGS['charset'];
+        global $config_database;
+        include ROOT.'/config/database.php'; ;
+
+        $this->db = $config_database['mysql'];
+
+        $dsn = "mysql:host=" . $this->db['host'] . ";port=" . $this->db['port'] . ";dbname=" . $this->db['database'] . ";charset=" . $this->db['charset'];
 
         $this->pdo = new PDO(
-            $dsn, DB_SETTINGS['user'], DB_SETTINGS['password'], DB_SETTINGS['options']
+            $dsn, $this->db['user'], $this->db['password'], $this->db['options']
         );
 
         return $this;
@@ -210,7 +216,7 @@ class Database
     public function backupBase(): void
     {
         $fullFileName = ROOT . '/backup/backup_' . date('Y_m_d_h_i_s') . '.sql';
-        $command = 'mysqldump -h' . DB_SETTINGS['host'] . ' -u' . DB_SETTINGS['user'] . ' -p' . DB_SETTINGS['password'] . ' ' . DB_SETTINGS['database'] . ' > ' . $fullFileName;
+        $command = 'mysqldump -h' . $this->db['host'] . ' -u' . $this->db['user'] . ' -p' . $this->db['password'] . ' ' . $this->db['database'] . ' > ' . $fullFileName;
         shell_exec($command);
     }
 

@@ -1,4 +1,5 @@
 ## Развёртывание приложения локально:
+Копируем файл .env.example, называем новый файл .env и прописываем настройки для базы данных в нём.
 
 ### Локально:
     #Запуск локального сервера php:
@@ -21,17 +22,7 @@
 
     #Бэкап сайта в папку backup:
     make backup_site
-#### Запуск проекта по http://localhost:8000 . 
-#### Настройки базы в config/core 
-    const DB_SETTINGS = [
-            ....
-        'host' => 'localhost',
-        'database' => 'database_test',
-        'user' => 'root',
-        'password' => '12345',
-            ....
-    ];
-
+#### Запуск проекта по http://localhost:8000 .
 ### Докеризация:
     #Запуск контейнеров докера:
     make up
@@ -52,14 +43,6 @@
     #Запуск сидеров для таблицы schelules:
     make docker_sch_seed    
 #### Запуск проекта по http://localhost:8080 .
-#### Настройки базы в config/core
-    const DB_SETTINGS = [
-            ....
-        'host' => 'db',
-        'database' => 'db_name',
-        'user' => 'root',
-        'password' => 'root',
-            ....
-    ];
+
 
 

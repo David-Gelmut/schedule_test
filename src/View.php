@@ -4,38 +4,38 @@ namespace src;
 
 class View
 {
-    public function render($view, $data = [], $layout = 'main')
+    public ?string $content;
+
+    public function render($view, $data = [], $layout = 'main'): false|string
     {
-
         extract($data);
-
-        $viewFile =  ROOT . "/views/{$view}.php";
-
+        $viewFile = ROOT . "/views/{$view}.php";
         if (is_file($viewFile)) {
             ob_start();
-            require $viewFile;
-            $content = ob_get_clean();
+            include $viewFile;
+            $this->content = ob_get_clean();
         }
-
         $layoutFile = ROOT . "/views/layouts/{$layout}.php";
+        include $layoutFile;
 
         if (is_file($layoutFile)) {
             ob_start();
-            require_once $layoutFile;
+            include $layoutFile;
             return ob_get_clean();
         }
+        return '';
     }
 
-   /* public function render(string $view)
+    public function renderPartial(string $view, $data = []): false|string
     {
-        $viewFile = ROOT . '/resources/views/' . $view.'.php';
+        extract($data);
+        $viewFile = ROOT . '/views/' . $view . '.php';
 
-        if(is_file($viewFile)){
+        if (is_file($viewFile)) {
             ob_start();
-            require $viewFile;
+            include $viewFile;
             $content = ob_get_clean();
         }
-
         return $content;
-    }*/
+    }
 }

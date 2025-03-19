@@ -46,7 +46,7 @@ class Migrations
     {
         $allFiles = glob($this->migrationDir . '*.sql');
 
-        $query = 'SHOW TABLES FROM `' . DB_SETTINGS['database'] . '` LIKE "' . self::MIGRATIONS_TABLE . '"';
+        $query = 'SHOW TABLES FROM `' . $this->database->db['database'] . '` LIKE "' . self::MIGRATIONS_TABLE . '"';
 
         if (!$this->database->query($query)->rowCount()) {
             return $allFiles;
