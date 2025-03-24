@@ -16,7 +16,7 @@ class View
             $this->content = ob_get_clean();
         }
         $layoutFile = ROOT . "/views/layouts/{$layout}.php";
-        include $layoutFile;
+        require_once $layoutFile;
 
         if (is_file($layoutFile)) {
             ob_start();

@@ -22,11 +22,11 @@ class Request
         return $errors;
     }
 
-    public function htmlspecialcharsPrepareRequest(): array
+    public function prepareRequest(): array
     {
         $requestArray = $this->isGet() ? $_GET : $_POST;
         array_map(function ($item) {
-            return htmlspecialchars($item);
+            return $item;
         }, $requestArray);
         return $requestArray;
     }

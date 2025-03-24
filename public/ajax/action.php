@@ -20,7 +20,7 @@ if (count($errors) > 0) {
     die();
 }
 
-$fieldsRequest = $request->htmlspecialcharsPrepareRequest();
+$fieldsRequest = $request->prepareRequest();
 echo $request->ajaxRequest($response, $fieldsRequest);
 die();
 
